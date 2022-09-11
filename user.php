@@ -12,7 +12,8 @@
 
     $result = mysqli_query($con, $sql);
     if ($result) {
-        echo "data inserted successfully";
+       // echo "data inserted successfully";
+       header('location:display.php');
     } else {
          die(mysql_error($con));
     }

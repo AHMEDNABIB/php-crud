@@ -33,22 +33,41 @@
   </thead>
   <tbody>
 
-     <?php
+    <?php
         $sql =  "SELECT * from `crud`";
 
-        $result = mysql_query($con , $sql);
+        $result = mysqli_query($con , $sql);
 
         if ($result) {
-            
+            // $row = mysqli_fetch_assoc($result);
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                $id = $row['id'];
+                $name= $row['name'];
+                $email=$row['email'];
+                $mobile = $row['mobile'];
+                $password =$row['password'];
+
+                echo '
+                <tr>
+                    <th scope="row">'.$id.'</th>
+                    <td>'.$name.'</td>
+                    <td>'.$email.'</td>
+                    <td>'.$mobile.'</td>
+                    <td>'.$password.'</td>
+
+                    <td>
+                      <button class="btn btn-primary"><a href="update.php"></a>Update</button>
+                      <button class="btn btn-danger"><a href="delete.php?deleteid='.$id.'"></a>Delete</button>
+                      </td>
+                </tr>
+                ';
+            }
         }
-     ?>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-   
+    ?>
+    
+  
+  
   </tbody>
 </table>
     </div>
