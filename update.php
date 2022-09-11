@@ -1,6 +1,19 @@
 <?php 
  include 'connect.php';
 
+ $id =$_GET['updateid'];
+ $sql = "Select * from `crud` where id =$id ";
+ $result = mysqli_query($con,$sql);
+$row = mysqli_fetch_assoc(
+    $result
+);
+$name= $row['name'];
+$email=$row['email'];
+$mobile = $row['mobile'];
+$password =$row['password'];
+
+
+
  if (isset($_POST['submit'])) {
     $name =$_POST['name'];
     $email = $_POST['email'];
@@ -8,11 +21,11 @@
     $password=$_POST['password'];
 
     
-    $sql = "insert into `crud` (name, email, mobile ,password) values('$name', '$email', '$mobile', '$password')";
+    $sql = "update `crud` set id=$id, name='$name' , email='$email', mobile ='$mobile' , password= '$password' where id=$id ";
 
     $result = mysqli_query($con, $sql);
     if ($result) {
-       // echo "data inserted successfully";
+        //echo "data updated successfully";
        header('location:display.php');
     } else {
          die(mysql_error($con));
@@ -21,8 +34,6 @@
     
  }
 ?>
-
-
 
 
 <!DOCTYPE html>
@@ -41,7 +52,7 @@
 
 <body>
     <div class="container my-5">
-        <form method='POST' action='user.php'>
+        <form method='POST' >
             <div class="form-group mb-3">
                 <label>Name</label>
                 <input type="text" class="form-control" placeholder="Enter your name" name=' name' autocomplete='off'>
