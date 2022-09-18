@@ -10,6 +10,8 @@ if (isset($_GET['deleteid'])) {
    $result = mysqli_query($con, $sql);
    if ($result) {
        // echo "data deleted successfully";
+        $_SESSION['status'] = "Registerd Successfully";
+       $_SESSION['status-code']='success';
        header('location:display.php');
     } else {
          //die(mysql_error($con));
